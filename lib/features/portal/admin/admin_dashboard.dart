@@ -28,7 +28,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
           children: [
             Icon(Icons.person_add_alt_1, color: LavaTheme.orangeStart),
             SizedBox(width: 10),
-            Text('Enroll New Student', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('Enroll New Student',
+                style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
         content: Column(
@@ -67,16 +68,21 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 setState(() {
                   _repo.addStudent(
                     nameController.text,
-                    classController.text.isEmpty ? 'Primary 1' : classController.text,
+                    classController.text.isEmpty
+                        ? 'Primary 1'
+                        : classController.text,
                   );
                 });
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Student registered! Parent Access Code generated.')),
+                  const SnackBar(
+                      content: Text(
+                          'Student registered! Parent Access Code generated.')),
                 );
               }
             },
-            label: const Text('Register Student', style: TextStyle(color: Colors.white)),
+            label: const Text('Register Student',
+                style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -95,7 +101,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
           children: [
             Icon(Icons.person_add_alt_1, color: LavaTheme.orangeStart),
             SizedBox(width: 10),
-            Text('Add New Teacher', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('Add New Teacher',
+                style: TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
         content: Column(
@@ -138,9 +145,12 @@ class _AdminDashboardState extends State<AdminDashboard> {
             ),
             icon: const Icon(Icons.check, color: Colors.white, size: 18),
             onPressed: () {
-              if (nameController.text.isNotEmpty && roleController.text.isNotEmpty && emailController.text.isNotEmpty) {
+              if (nameController.text.isNotEmpty &&
+                  roleController.text.isNotEmpty &&
+                  emailController.text.isNotEmpty) {
                 setState(() {
-                  _repo.addTeacher(nameController.text, roleController.text, emailController.text);
+                  _repo.addTeacher(nameController.text, roleController.text,
+                      emailController.text);
                 });
                 Navigator.pop(context);
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -148,7 +158,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 );
               }
             },
-            label: const Text('Add Teacher', style: TextStyle(color: Colors.white)),
+            label: const Text('Add Teacher',
+                style: TextStyle(color: Colors.white)),
           ),
         ],
       ),
@@ -160,11 +171,16 @@ class _AdminDashboardState extends State<AdminDashboard> {
     return PortalShell(
       roleTitle: 'Executive Admin Command',
       selectedIndex: _currentNavIndex,
-      onDestinationSelected: (index) => setState(() => _currentNavIndex = index),
+      onDestinationSelected: (index) =>
+          setState(() => _currentNavIndex = index),
       navItems: const [
-        NavigationDestination(icon: Icon(Icons.admin_panel_settings_outlined), label: 'Control Center'),
-        NavigationDestination(icon: Icon(Icons.school_outlined), label: 'Students Directory'),
-        NavigationDestination(icon: Icon(Icons.badge_outlined), label: 'Staff Roster'),
+        NavigationDestination(
+            icon: Icon(Icons.admin_panel_settings_outlined),
+            label: 'Control Center'),
+        NavigationDestination(
+            icon: Icon(Icons.school_outlined), label: 'Students Directory'),
+        NavigationDestination(
+            icon: Icon(Icons.badge_outlined), label: 'Staff Roster'),
       ],
       body: _buildCurrentTab(),
     );
@@ -201,7 +217,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
               borderRadius: BorderRadius.circular(16),
               boxShadow: [
                 BoxShadow(
-                  color: LavaTheme.orangeStart.withOpacity(0.2),
+                  color: LavaTheme.orangeStart.withValues(alpha: 0.2),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 )
@@ -212,7 +228,8 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 const CircleAvatar(
                   radius: 32,
                   backgroundColor: Colors.white24,
-                  child: Icon(Icons.security_outlined, size: 36, color: Colors.white),
+                  child: Icon(Icons.security_outlined,
+                      size: 36, color: Colors.white),
                 ),
                 const SizedBox(width: 20),
                 Expanded(
@@ -221,12 +238,17 @@ class _AdminDashboardState extends State<AdminDashboard> {
                     children: [
                       const Text(
                         'Principal Command Dashboard',
-                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       const SizedBox(height: 4),
                       Text(
                         'Session: 2025/2026 Academic Year  •  Third Term Active',
-                        style: TextStyle(color: Colors.white.withOpacity(0.85), fontSize: 14),
+                        style: TextStyle(
+                            color: Colors.white.withValues(alpha: 0.85),
+                            fontSize: 14),
                       ),
                     ],
                   ),
@@ -234,11 +256,16 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ElevatedButton.icon(
                   onPressed: _showAddStudentModal,
                   icon: const Icon(Icons.add, color: Color(0xFF1A1A1A)),
-                  label: const Text('Quick Enroll', style: TextStyle(fontWeight: FontWeight.bold, color: Color(0xFF1A1A1A))),
+                  label: const Text('Quick Enroll',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF1A1A1A))),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 20, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                 )
               ],
@@ -249,11 +276,29 @@ class _AdminDashboardState extends State<AdminDashboard> {
           // Key System Performance Counters
           Row(
             children: [
-              Expanded(child: _buildMetricCard('Total Student Body', '${_students.length}', Icons.groups, LavaTheme.orangeStart, '+4 new this term')),
+              Expanded(
+                  child: _buildMetricCard(
+                      'Total Student Body',
+                      '${_students.length}',
+                      Icons.groups,
+                      LavaTheme.orangeStart,
+                      '+4 new this term')),
               const SizedBox(width: 16),
-              Expanded(child: _buildMetricCard('Teaching & Non-Teaching', '${_staff.length}', Icons.badge, Colors.indigo, '2 on active leave')),
+              Expanded(
+                  child: _buildMetricCard(
+                      'Teaching & Non-Teaching',
+                      '${_staff.length}',
+                      Icons.badge,
+                      Colors.indigo,
+                      '2 on active leave')),
               const SizedBox(width: 16),
-              Expanded(child: _buildMetricCard('Fee Collection Rate', '82.4%', Icons.account_balance_wallet_outlined, Colors.green.shade700, '₦4.2M Collected')),
+              Expanded(
+                  child: _buildMetricCard(
+                      'Fee Collection Rate',
+                      '82.4%',
+                      Icons.account_balance_wallet_outlined,
+                      Colors.green.shade700,
+                      '₦4.2M Collected')),
             ],
           ),
           const SizedBox(height: 28),
@@ -273,17 +318,24 @@ class _AdminDashboardState extends State<AdminDashboard> {
                       children: [
                         const Text(
                           'Executive Command Actions',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: LavaTheme.textPrimary),
                         ),
                         const SizedBox(height: 16),
                         Wrap(
                           spacing: 12,
                           runSpacing: 12,
                           children: [
-                            _buildActionButton(Icons.campaign_outlined, 'School Broadcast', Colors.orange),
-                            _buildActionButton(Icons.assignment_ind_outlined, 'Assign Subject Teachers', Colors.blue),
-                            _buildActionButton(Icons.assessment_outlined, 'Lock Term Broadsheets', Colors.purple),
-                            _buildActionButton(Icons.receipt_long_outlined, 'Generate Fee Invoices', Colors.green),
+                            _buildActionButton(Icons.campaign_outlined,
+                                'School Broadcast', Colors.orange),
+                            _buildActionButton(Icons.assignment_ind_outlined,
+                                'Assign Subject Teachers', Colors.blue),
+                            _buildActionButton(Icons.assessment_outlined,
+                                'Lock Term Broadsheets', Colors.purple),
+                            _buildActionButton(Icons.receipt_long_outlined,
+                                'Generate Fee Invoices', Colors.green),
                           ],
                         )
                       ],
@@ -294,33 +346,42 @@ class _AdminDashboardState extends State<AdminDashboard> {
               const SizedBox(width: 20),
 
               // Quick Staff Presence Summary
-              Expanded(
+              const Expanded(
                 flex: 1,
                 child: Card(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Staff Status Today',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: LavaTheme.textPrimary),
                         ),
-                        const SizedBox(height: 12),
+                        SizedBox(height: 12),
                         ListTile(
                           dense: true,
                           contentPadding: EdgeInsets.zero,
-                          leading: const CircleAvatar(backgroundColor: Colors.green, radius: 6),
-                          title: const Text('Present & Teaching', style: TextStyle(fontWeight: FontWeight.w600)),
-                          trailing: const Text('24 Staff', style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: CircleAvatar(
+                              backgroundColor: Colors.green, radius: 6),
+                          title: Text('Present & Teaching',
+                              style: TextStyle(fontWeight: FontWeight.w600)),
+                          trailing: Text('24 Staff',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
-                        const Divider(height: 1),
+                        Divider(height: 1),
                         ListTile(
                           dense: true,
                           contentPadding: EdgeInsets.zero,
-                          leading: const CircleAvatar(backgroundColor: Colors.orange, radius: 6),
-                          title: const Text('On Permitted Leave', style: TextStyle(fontWeight: FontWeight.w600)),
-                          trailing: const Text('2 Staff', style: TextStyle(fontWeight: FontWeight.bold)),
+                          leading: CircleAvatar(
+                              backgroundColor: Colors.orange, radius: 6),
+                          title: Text('On Permitted Leave',
+                              style: TextStyle(fontWeight: FontWeight.w600)),
+                          trailing: Text('2 Staff',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),
@@ -346,23 +407,26 @@ class _AdminDashboardState extends State<AdminDashboard> {
         width: 180,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.08),
+          color: color.withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: color.withOpacity(0.2)),
+          border: Border.all(color: color.withValues(alpha: 0.2)),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(icon, color: color, size: 28),
             const SizedBox(height: 12),
-            Text(label, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
+            Text(label,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildMetricCard(String title, String value, IconData icon, Color color, String badgeText) {
+  Widget _buildMetricCard(String title, String value, IconData icon,
+      Color color, String badgeText) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -373,23 +437,34 @@ class _AdminDashboardState extends State<AdminDashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 CircleAvatar(
-                  backgroundColor: color.withOpacity(0.12),
+                  backgroundColor: color.withValues(alpha: 0.12),
                   child: Icon(icon, color: color),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.1),
+                    color: color.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: Text(badgeText, style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold)),
+                  child: Text(badgeText,
+                      style: TextStyle(
+                          color: color,
+                          fontSize: 11,
+                          fontWeight: FontWeight.bold)),
                 )
               ],
             ),
             const SizedBox(height: 16),
-            Text(value, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+            Text(value,
+                style: const TextStyle(
+                    fontSize: 26,
+                    fontWeight: FontWeight.bold,
+                    color: LavaTheme.textPrimary)),
             const SizedBox(height: 4),
-            Text(title, style: const TextStyle(color: LavaTheme.textSecondary, fontSize: 13)),
+            Text(title,
+                style: const TextStyle(
+                    color: LavaTheme.textSecondary, fontSize: 13)),
           ],
         ),
       ),
@@ -406,25 +481,32 @@ class _AdminDashboardState extends State<AdminDashboard> {
           children: [
             const Text(
               'Master Student Registry',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: LavaTheme.textPrimary),
             ),
             ElevatedButton.icon(
               onPressed: () => _showAddStudentModal(),
               icon: const Icon(Icons.add, color: Colors.white),
-              label: const Text('Add Student', style: TextStyle(color: Colors.white)),
+              label: const Text('Add Student',
+                  style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: LavaTheme.orangeStart,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
             const SizedBox(width: 12),
             ElevatedButton.icon(
               onPressed: _showAddTeacherModal,
               icon: const Icon(Icons.person_add, color: Colors.white),
-              label: const Text('Add Teacher', style: TextStyle(color: Colors.white)),
+              label: const Text('Add Teacher',
+                  style: TextStyle(color: Colors.white)),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade700,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
               ),
             ),
           ],
@@ -437,22 +519,35 @@ class _AdminDashboardState extends State<AdminDashboard> {
               separatorBuilder: (_, __) => const Divider(height: 1),
               itemBuilder: (context, index) {
                 final student = _students[index];
-                  final bool feePaid = student.fees == 'Paid';
+                final bool feePaid = student.fees == 'Paid';
 
-                  return ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    leading: CircleAvatar(
-                      backgroundColor: LavaTheme.orangeStart.withOpacity(0.1),
-                      child: Text(student.name[0], style: const TextStyle(color: LavaTheme.orangeStart, fontWeight: FontWeight.bold)),
+                return ListTile(
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  leading: CircleAvatar(
+                    backgroundColor:
+                        LavaTheme.orangeStart.withValues(alpha: 0.1),
+                    child: Text(student.name[0],
+                        style: const TextStyle(
+                            color: LavaTheme.orangeStart,
+                            fontWeight: FontWeight.bold)),
                   ),
-                  title: Text(student.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text('ID: ${student.id} | Class: ${student.className} | Parent Code: ${student.parentCode}'),
+                  title: Text(student.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text(
+                      'ID: ${student.id} | Class: ${student.className} | Parent Code: ${student.parentCode}'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Chip(
-                        label: Text(student.fees, style: TextStyle(color: feePaid ? Colors.green : Colors.orange, fontSize: 11, fontWeight: FontWeight.bold)),
-                        backgroundColor: feePaid ? Colors.green.shade50 : Colors.orange.shade50,
+                        label: Text(student.fees,
+                            style: TextStyle(
+                                color: feePaid ? Colors.green : Colors.orange,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold)),
+                        backgroundColor: feePaid
+                            ? Colors.green.shade50
+                            : Colors.orange.shade50,
                         side: BorderSide.none,
                       ),
                       const SizedBox(width: 8),
@@ -478,7 +573,10 @@ class _AdminDashboardState extends State<AdminDashboard> {
       children: [
         const Text(
           'School Staff & Faculty Directory',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+          style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: LavaTheme.textPrimary),
         ),
         const SizedBox(height: 16),
         Expanded(
@@ -491,16 +589,23 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 final bool isPresent = member.status == 'Present';
 
                 return ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   leading: CircleAvatar(
                     backgroundColor: Colors.indigo.shade50,
                     child: Icon(Icons.person, color: Colors.indigo.shade700),
                   ),
-                  title: Text(member.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(member.name,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   subtitle: Text('${member.role} • ${member.email}'),
                   trailing: Chip(
-                    label: Text(member.status, style: TextStyle(color: isPresent ? Colors.green : Colors.grey, fontSize: 11, fontWeight: FontWeight.bold)),
-                    backgroundColor: isPresent ? Colors.green.shade50 : Colors.grey.shade200,
+                    label: Text(member.status,
+                        style: TextStyle(
+                            color: isPresent ? Colors.green : Colors.grey,
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold)),
+                    backgroundColor:
+                        isPresent ? Colors.green.shade50 : Colors.grey.shade200,
                     side: BorderSide.none,
                   ),
                 );

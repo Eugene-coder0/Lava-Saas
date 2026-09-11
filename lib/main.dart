@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lavasaas/app/theme/app_theme.dart';
-// Change this:
-// import 'package:lavasaas/features/landing/landing_page.dart';
-
-// To this:
 import 'package:lavasaas/features/portal/landing/landing_page.dart';
+
 void main() {
   runApp(const LavaSaaSApp());
 }

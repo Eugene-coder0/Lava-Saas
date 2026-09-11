@@ -16,7 +16,8 @@ class LavaTheme {
     end: Alignment.bottomRight,
   );
 
-  static final ValueNotifier<ThemeMode> themeMode = ValueNotifier(ThemeMode.light);
+  static final ValueNotifier<ThemeMode> themeMode =
+      ValueNotifier(ThemeMode.light);
 
   static bool get isDarkMode => themeMode.value == ThemeMode.dark;
 
@@ -34,10 +35,10 @@ class LavaTheme {
         foregroundColor: Color(0xFF2C2D30),
         elevation: 0,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: Colors.white,
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.04),
+        shadowColor: Colors.black.withValues(alpha: 0.04),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
@@ -59,10 +60,10 @@ class LavaTheme {
         foregroundColor: Colors.white,
         elevation: 0,
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: const Color(0xFF1F2937),
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.3),
+        shadowColor: Colors.black.withValues(alpha: 0.3),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),

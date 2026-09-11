@@ -21,14 +21,17 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   String get _studentId => widget.studentId;
   Student? get _student => _repo.getStudentById(_studentId);
-  List<SubjectResult> get _studentResults => _repo.getResultsForStudent(_studentId);
-  SubjectResult? get _latestResult => _repo.getLatestResultForStudent(_studentId);
+  List<SubjectResult> get _studentResults =>
+      _repo.getResultsForStudent(_studentId);
+  SubjectResult? get _latestResult =>
+      _repo.getLatestResultForStudent(_studentId);
   String? _selectedSubject;
 
   bool _sortNewestFirst = true;
 
   List<String> get _subjectFilterOptions {
-    final subjects = _studentResults.map((result) => result.subject).toSet().toList();
+    final subjects =
+        _studentResults.map((result) => result.subject).toSet().toList();
     subjects.sort();
     return subjects;
   }
@@ -37,7 +40,9 @@ class _StudentDashboardState extends State<StudentDashboard> {
     if (_selectedSubject == null || _selectedSubject == 'All') {
       return _studentResults;
     }
-    return _studentResults.where((result) => result.subject == _selectedSubject).toList();
+    return _studentResults
+        .where((result) => result.subject == _selectedSubject)
+        .toList();
   }
 
   List<SubjectResult> get _displayResults {
@@ -59,7 +64,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   String get _averageScore {
     if (_studentResults.isEmpty) return 'N/A';
-    final total = _studentResults.map((result) => result.total).reduce((a, b) => a + b);
+    final total =
+        _studentResults.map((result) => result.total).reduce((a, b) => a + b);
     return '${(total / _studentResults.length).toStringAsFixed(1)}%';
   }
 
@@ -115,11 +121,15 @@ class _StudentDashboardState extends State<StudentDashboard> {
     return PortalShell(
       roleTitle: 'Student Portal',
       selectedIndex: _currentNavIndex,
-      onDestinationSelected: (index) => setState(() => _currentNavIndex = index),
+      onDestinationSelected: (index) =>
+          setState(() => _currentNavIndex = index),
       navItems: const [
-        NavigationDestination(icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
-        NavigationDestination(icon: Icon(Icons.assignment_outlined), label: 'Assignments'),
-        NavigationDestination(icon: Icon(Icons.schedule_outlined), label: 'Timetable'),
+        NavigationDestination(
+            icon: Icon(Icons.dashboard_outlined), label: 'Dashboard'),
+        NavigationDestination(
+            icon: Icon(Icons.assignment_outlined), label: 'Assignments'),
+        NavigationDestination(
+            icon: Icon(Icons.schedule_outlined), label: 'Timetable'),
       ],
       body: _buildCurrentTab(),
     );
@@ -154,7 +164,8 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   const CircleAvatar(
                     radius: 28,
                     backgroundColor: LavaTheme.creamBackground,
-                    child: Icon(Icons.school, size: 32, color: LavaTheme.orangeStart),
+                    child: Icon(Icons.school,
+                        size: 32, color: LavaTheme.orangeStart),
                   ),
                   const SizedBox(width: 20),
                   Expanded(
@@ -163,12 +174,16 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       children: [
                         Text(
                           'Welcome back, ${_student?.name ?? 'Student'}!',
-                          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+                          style: const TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: LavaTheme.textPrimary),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Class: ${_student?.className ?? 'Unknown'} | Student ID: ${_student?.id ?? _studentId}',
-                          style: const TextStyle(color: LavaTheme.textSecondary, fontSize: 14),
+                          style: const TextStyle(
+                              color: LavaTheme.textSecondary, fontSize: 14),
                         ),
                       ],
                     ),
@@ -191,18 +206,24 @@ class _StudentDashboardState extends State<StudentDashboard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Latest Update', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+                          const Text('Latest Update',
+                              style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                  color: LavaTheme.textPrimary)),
                           const SizedBox(height: 6),
                           Text(
                             '${_latestResult!.subject} result posted: ${_latestResult!.total}% • ${_latestResult!.grade}',
-                            style: const TextStyle(color: LavaTheme.textSecondary),
+                            style:
+                                const TextStyle(color: LavaTheme.textSecondary),
                           ),
                         ],
                       ),
                     ),
                     Text(
-                      '${_latestResult!.postedBy}',
-                      style: const TextStyle(fontSize: 12, color: LavaTheme.textSecondary),
+                      _latestResult!.postedBy,
+                      style: const TextStyle(
+                          fontSize: 12, color: LavaTheme.textSecondary),
                     ),
                   ],
                 ),
@@ -213,15 +234,21 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
           Row(
             children: [
-              Expanded(child: _buildStatCard('Result Count', '$_resultCount', Icons.list_alt, LavaTheme.orangeStart)),
+              Expanded(
+                  child: _buildStatCard('Result Count', '$_resultCount',
+                      Icons.list_alt, LavaTheme.orangeStart)),
               const SizedBox(width: 16),
-              Expanded(child: _buildStatCard('Best Subject', _bestSubject, Icons.star, Colors.amber.shade700)),
+              Expanded(
+                  child: _buildStatCard('Best Subject', _bestSubject,
+                      Icons.star, Colors.amber.shade700)),
             ],
           ),
           const SizedBox(height: 16),
           Row(
             children: [
-              Expanded(child: _buildStatCard('Average Score', _averageScore, Icons.bar_chart, Colors.green.shade700)),
+              Expanded(
+                  child: _buildStatCard('Average Score', _averageScore,
+                      Icons.bar_chart, Colors.green.shade700)),
             ],
           ),
           const SizedBox(height: 24),
@@ -229,17 +256,24 @@ class _StudentDashboardState extends State<StudentDashboard> {
           if (_subjectFilterOptions.isNotEmpty)
             Card(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 16.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 16.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text('Filter by subject', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+                    const Text('Filter by subject',
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: LavaTheme.textPrimary)),
                     DropdownButton<String>(
                       value: _selectedSubject ?? 'All',
                       items: ['All', ..._subjectFilterOptions]
-                          .map((subject) => DropdownMenuItem(value: subject, child: Text(subject)))
+                          .map((subject) => DropdownMenuItem(
+                              value: subject, child: Text(subject)))
                           .toList(),
-                      onChanged: (value) => setState(() => _selectedSubject = value),
+                      onChanged: (value) =>
+                          setState(() => _selectedSubject = value),
                     ),
                   ],
                 ),
@@ -257,18 +291,27 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Latest Results', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+                      const Text('Latest Results',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: LavaTheme.textPrimary)),
                       Row(
                         children: [
-                          const Text('Sort: ', style: TextStyle(color: LavaTheme.textSecondary)),
+                          const Text('Sort: ',
+                              style: TextStyle(color: LavaTheme.textSecondary)),
                           DropdownButton<bool>(
                             value: _sortNewestFirst,
                             items: const [
-                              DropdownMenuItem(value: true, child: Text('Newest')),
-                              DropdownMenuItem(value: false, child: Text('Subject')),
+                              DropdownMenuItem(
+                                  value: true, child: Text('Newest')),
+                              DropdownMenuItem(
+                                  value: false, child: Text('Subject')),
                             ],
                             onChanged: (value) {
-                              if (value != null) setState(() => _sortNewestFirst = value);
+                              if (value != null) {
+                                setState(() => _sortNewestFirst = value);
+                              }
                             },
                           ),
                         ],
@@ -277,16 +320,23 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   ),
                   const SizedBox(height: 12),
                   if (_displayResults.isEmpty)
-                    const Text('No results match the selected filter.', style: TextStyle(color: LavaTheme.textSecondary))
+                    const Text('No results match the selected filter.',
+                        style: TextStyle(color: LavaTheme.textSecondary))
                   else
                     Column(
                       children: _displayResults.map((result) {
                         return ListTile(
                           dense: true,
                           contentPadding: EdgeInsets.zero,
-                          title: Text(result.subject, style: const TextStyle(fontWeight: FontWeight.w600)),
-                          subtitle: Text('Total: ${result.total} • Grade: ${result.grade}'),
-                          trailing: Text(result.postedBy, style: const TextStyle(fontSize: 12, color: LavaTheme.textSecondary)),
+                          title: Text(result.subject,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w600)),
+                          subtitle: Text(
+                              'Total: ${result.total} • Grade: ${result.grade}'),
+                          trailing: Text(result.postedBy,
+                              style: const TextStyle(
+                                  fontSize: 12,
+                                  color: LavaTheme.textSecondary)),
                         );
                       }).toList(),
                     ),
@@ -308,7 +358,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   children: [
                     const Text(
                       'Today\'s Schedule',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: LavaTheme.textPrimary),
                     ),
                     const SizedBox(height: 12),
                     Card(
@@ -323,15 +376,21 @@ class _StudentDashboardState extends State<StudentDashboard> {
                             leading: Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: LavaTheme.orangeStart.withOpacity(0.1),
+                                color: LavaTheme.orangeStart
+                                    .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Text(
                                 item['time']!,
-                                style: const TextStyle(color: LavaTheme.orangeStart, fontWeight: FontWeight.bold, fontSize: 11),
+                                style: const TextStyle(
+                                    color: LavaTheme.orangeStart,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 11),
                               ),
                             ),
-                            title: Text(item['subject']!, style: const TextStyle(fontWeight: FontWeight.w600)),
+                            title: Text(item['subject']!,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600)),
                             subtitle: Text(item['room']!),
                           );
                         },
@@ -350,7 +409,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
                   children: [
                     const Text(
                       'Upcoming Homework',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: LavaTheme.textPrimary),
                     ),
                     const SizedBox(height: 12),
                     Card(
@@ -364,18 +426,25 @@ class _StudentDashboardState extends State<StudentDashboard> {
                           final bool isSubmitted = ass['status'] == 'Submitted';
 
                           return ListTile(
-                            title: Text(ass['title']!, style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14)),
-                            subtitle: Text('${ass['subject']} • Due: ${ass['dueDate']}'),
+                            title: Text(ass['title']!,
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600, fontSize: 14)),
+                            subtitle: Text(
+                                '${ass['subject']} • Due: ${ass['dueDate']}'),
                             trailing: Chip(
                               label: Text(
                                 ass['status']!,
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: isSubmitted ? Colors.green : Colors.orange,
+                                  color: isSubmitted
+                                      ? Colors.green
+                                      : Colors.orange,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              backgroundColor: isSubmitted ? Colors.green.shade50 : Colors.orange.shade50,
+                              backgroundColor: isSubmitted
+                                  ? Colors.green.shade50
+                                  : Colors.orange.shade50,
                               side: BorderSide.none,
                             ),
                           );
@@ -392,23 +461,30 @@ class _StudentDashboardState extends State<StudentDashboard> {
     );
   }
 
-  Widget _buildStatCard(String title, String value, IconData icon, Color color) {
+  Widget _buildStatCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: color.withOpacity(0.12),
+              backgroundColor: color.withValues(alpha: 0.12),
               child: Icon(icon, color: color),
             ),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(color: LavaTheme.textSecondary, fontSize: 13)),
+                Text(title,
+                    style: const TextStyle(
+                        color: LavaTheme.textSecondary, fontSize: 13)),
                 const SizedBox(height: 4),
-                Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+                Text(value,
+                    style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: LavaTheme.textPrimary)),
               ],
             )
           ],
@@ -424,7 +500,10 @@ class _StudentDashboardState extends State<StudentDashboard> {
       children: [
         const Text(
           'Assignments & Homework Tasks',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+          style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: LavaTheme.textPrimary),
         ),
         const SizedBox(height: 16),
         Expanded(
@@ -439,11 +518,15 @@ class _StudentDashboardState extends State<StudentDashboard> {
                 return ListTile(
                   contentPadding: const EdgeInsets.all(16),
                   leading: CircleAvatar(
-                    backgroundColor: LavaTheme.orangeStart.withOpacity(0.1),
-                    child: const Icon(Icons.assignment, color: LavaTheme.orangeStart),
+                    backgroundColor:
+                        LavaTheme.orangeStart.withValues(alpha: 0.1),
+                    child: const Icon(Icons.assignment,
+                        color: LavaTheme.orangeStart),
                   ),
-                  title: Text(ass['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                  subtitle: Text('Subject: ${ass['subject']} | Due: ${ass['dueDate']}'),
+                  title: Text(ass['title']!,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
+                  subtitle: Text(
+                      'Subject: ${ass['subject']} | Due: ${ass['dueDate']}'),
                   trailing: OutlinedButton(
                     onPressed: isSubmitted ? null : () {},
                     child: Text(isSubmitted ? 'Submitted' : 'Upload Solution'),
@@ -459,14 +542,17 @@ class _StudentDashboardState extends State<StudentDashboard> {
 
   // --- TAB 3: FULL TIMETABLE ---
   Widget _buildTimetableTab() {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Weekly Class Timetable',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+          style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: LavaTheme.textPrimary),
         ),
-        const SizedBox(height: 16),
+        SizedBox(height: 16),
         Expanded(
           child: Card(
             child: Center(

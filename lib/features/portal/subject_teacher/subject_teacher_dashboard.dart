@@ -7,7 +7,8 @@ class SubjectTeacherDashboard extends StatefulWidget {
   const SubjectTeacherDashboard({super.key});
 
   @override
-  State<SubjectTeacherDashboard> createState() => _SubjectTeacherDashboardState();
+  State<SubjectTeacherDashboard> createState() =>
+      _SubjectTeacherDashboardState();
 }
 
 class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
@@ -20,7 +21,10 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
   int get _submittedResultsCount => _submittedResults.length;
 
   int get _pendingClassCount {
-    return _assignedClasses.where((item) => !_repo.hasResultsForClass(item.className, item.subject)).length;
+    return _assignedClasses
+        .where(
+            (item) => !_repo.hasResultsForClass(item.className, item.subject))
+        .length;
   }
 
   List<SubjectResult> get _recentResults {
@@ -62,10 +66,13 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
     return PortalShell(
       roleTitle: 'Subject Teacher - Mathematics',
       selectedIndex: _currentNavIndex,
-      onDestinationSelected: (index) => setState(() => _currentNavIndex = index),
+      onDestinationSelected: (index) =>
+          setState(() => _currentNavIndex = index),
       navItems: const [
-        NavigationDestination(icon: Icon(Icons.class_outlined), label: 'My Classes'),
-        NavigationDestination(icon: Icon(Icons.history_outlined), label: 'Submission Log'),
+        NavigationDestination(
+            icon: Icon(Icons.class_outlined), label: 'My Classes'),
+        NavigationDestination(
+            icon: Icon(Icons.history_outlined), label: 'Submission Log'),
       ],
       body: _buildCurrentTab(),
     );
@@ -89,15 +96,22 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
                 itemBuilder: (context, index) {
                   final result = _recentResults[index];
                   return ListTile(
-                    title: Text('${result.studentName} • ${result.subject}', style: const TextStyle(fontWeight: FontWeight.w600)),
-                    subtitle: Text('${result.className} | Posted by ${result.postedBy}'),
+                    title: Text('${result.studentName} • ${result.subject}',
+                        style: const TextStyle(fontWeight: FontWeight.w600)),
+                    subtitle: Text(
+                        '${result.className} | Posted by ${result.postedBy}'),
                     trailing: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text('${result.total} pts', style: const TextStyle(fontWeight: FontWeight.bold, color: LavaTheme.orangeStart)),
+                        Text('${result.total} pts',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: LavaTheme.orangeStart)),
                         const SizedBox(height: 4),
-                        Text('${result.grade}', style: const TextStyle(color: LavaTheme.textSecondary)),
+                        Text(result.grade,
+                            style: const TextStyle(
+                                color: LavaTheme.textSecondary)),
                       ],
                     ),
                   );
@@ -111,7 +125,10 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
       children: [
         const Text(
           'Assigned Classes',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary),
+          style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: LavaTheme.textPrimary),
         ),
         const SizedBox(height: 4),
         Text(
@@ -123,11 +140,19 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
         Row(
           children: [
             Expanded(
-              child: _buildSummaryCard('Submission Log', '$_submittedResultsCount entries', Icons.history_outlined, Colors.indigo),
+              child: _buildSummaryCard(
+                  'Submission Log',
+                  '$_submittedResultsCount entries',
+                  Icons.history_outlined,
+                  Colors.indigo),
             ),
             const SizedBox(width: 16),
             Expanded(
-              child: _buildSummaryCard('Pending Uploads', '$_pendingClassCount subjects', Icons.pending_actions, Colors.orange),
+              child: _buildSummaryCard(
+                  'Pending Uploads',
+                  '$_pendingClassCount subjects',
+                  Icons.pending_actions,
+                  Colors.orange),
             ),
           ],
         ),
@@ -145,15 +170,18 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
             itemCount: _assignedClasses.length,
             itemBuilder: (context, index) {
               final item = _assignedClasses[index];
-              final bool isSubmitted = _repo.hasResultsForClass(item.className, item.subject);
-              final String statusLabel = isSubmitted ? 'Submitted' : 'Pending Submission';
+              final bool isSubmitted =
+                  _repo.hasResultsForClass(item.className, item.subject);
+              final String statusLabel =
+                  isSubmitted ? 'Submitted' : 'Pending Submission';
               final String studentCount = '${item.studentCount} Students';
 
               return Card(
                 elevation: 2,
                 child: InkWell(
                   borderRadius: BorderRadius.circular(16),
-                  onTap: () => _openScoreEntryModal(item.className, item.subject),
+                  onTap: () =>
+                      _openScoreEntryModal(item.className, item.subject),
                   child: Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
@@ -164,9 +192,11 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 4),
                               decoration: BoxDecoration(
-                                color: LavaTheme.orangeStart.withOpacity(0.1),
+                                color: LavaTheme.orangeStart
+                                    .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(6),
                               ),
                               child: Text(
@@ -179,7 +209,9 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
                               ),
                             ),
                             Icon(
-                              isSubmitted ? Icons.check_circle : Icons.pending_actions,
+                              isSubmitted
+                                  ? Icons.check_circle
+                                  : Icons.pending_actions,
                               color: isSubmitted ? Colors.green : Colors.orange,
                               size: 20,
                             ),
@@ -214,10 +246,12 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: isSubmitted ? Colors.green : Colors.orange,
+                                color:
+                                    isSubmitted ? Colors.green : Colors.orange,
                               ),
                             ),
-                            const Icon(Icons.arrow_forward_ios, size: 14, color: LavaTheme.textSecondary),
+                            const Icon(Icons.arrow_forward_ios,
+                                size: 14, color: LavaTheme.textSecondary),
                           ],
                         ),
                       ],
@@ -231,30 +265,41 @@ class _SubjectTeacherDashboardState extends State<SubjectTeacherDashboard> {
       ],
     );
   }
-  Widget _buildSummaryCard(String title, String value, IconData icon, Color color) {
+
+  Widget _buildSummaryCard(
+      String title, String value, IconData icon, Color color) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: color.withOpacity(0.12),
+              backgroundColor: color.withValues(alpha: 0.12),
               child: Icon(icon, color: color),
             ),
             const SizedBox(width: 16),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: LavaTheme.textPrimary)),
+                Text(title,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: LavaTheme.textPrimary)),
                 const SizedBox(height: 6),
-                Text(value, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: LavaTheme.textSecondary)),
+                Text(value,
+                    style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: LavaTheme.textSecondary)),
               ],
             ),
           ],
         ),
       ),
     );
-  }}
+  }
+}
 
 // --- SCORE ENTRY MODAL (FIXED OVERFLOW) ---
 class ScoreEntryModal extends StatefulWidget {
@@ -282,7 +327,8 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
     final students = widget.repository.getStudentsForClass(widget.className);
     _scoreEntries = students.map((student) {
       final existing = widget.repository.results.firstWhere(
-        (result) => result.studentId == student.id && result.subject == widget.subject,
+        (result) =>
+            result.studentId == student.id && result.subject == widget.subject,
         orElse: () => SubjectResult(
           studentId: student.id,
           studentName: student.name,
@@ -326,11 +372,13 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
                   children: [
                     Text(
                       'Score Entry: ${widget.subject}',
-                      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
                       'Class: ${widget.className} | Term 1',
-                      style: const TextStyle(color: LavaTheme.textSecondary, fontSize: 13),
+                      style: const TextStyle(
+                          color: LavaTheme.textSecondary, fontSize: 13),
                     ),
                   ],
                 ),
@@ -367,17 +415,22 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
                         int total = ca1 + ca2 + exam;
 
                         return DataRow(cells: [
-                          DataCell(Text(student['name'], style: const TextStyle(fontWeight: FontWeight.w600))),
+                          DataCell(Text(student['name'],
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.w600))),
                           DataCell(
                             SizedBox(
                               width: 50,
                               child: TextField(
-                                controller: TextEditingController(text: student['ca1']),
+                                controller:
+                                    TextEditingController(text: student['ca1']),
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) => setState(() => student['ca1'] = val),
+                                onChanged: (val) =>
+                                    setState(() => student['ca1'] = val),
                                 decoration: const InputDecoration(
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 8),
                                 ),
                               ),
                             ),
@@ -386,12 +439,15 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
                             SizedBox(
                               width: 50,
                               child: TextField(
-                                controller: TextEditingController(text: student['ca2']),
+                                controller:
+                                    TextEditingController(text: student['ca2']),
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) => setState(() => student['ca2'] = val),
+                                onChanged: (val) =>
+                                    setState(() => student['ca2'] = val),
                                 decoration: const InputDecoration(
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 8),
                                 ),
                               ),
                             ),
@@ -400,12 +456,15 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
                             SizedBox(
                               width: 50,
                               child: TextField(
-                                controller: TextEditingController(text: student['exam']),
+                                controller: TextEditingController(
+                                    text: student['exam']),
                                 keyboardType: TextInputType.number,
-                                onChanged: (val) => setState(() => student['exam'] = val),
+                                onChanged: (val) =>
+                                    setState(() => student['exam'] = val),
                                 decoration: const InputDecoration(
                                   isDense: true,
-                                  contentPadding: EdgeInsets.symmetric(horizontal: 6, vertical: 8),
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 6, vertical: 8),
                                 ),
                               ),
                             ),
@@ -413,7 +472,9 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
                           DataCell(
                             Text(
                               '$total',
-                              style: const TextStyle(fontWeight: FontWeight.bold, color: LavaTheme.orangeStart),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: LavaTheme.orangeStart),
                             ),
                           ),
                         ]);
@@ -432,7 +493,8 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
               children: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel', style: TextStyle(color: LavaTheme.textSecondary)),
+                  child: const Text('Cancel',
+                      style: TextStyle(color: LavaTheme.textSecondary)),
                 ),
                 const SizedBox(width: 12),
                 ElevatedButton.icon(
@@ -456,14 +518,18 @@ class _ScoreEntryModalState extends State<ScoreEntryModal> {
 
                     Navigator.pop(context);
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Scores synced to ${widget.className} Class Broad Sheet!')),
+                      SnackBar(
+                          content: Text(
+                              'Scores synced to ${widget.className} Class Broad Sheet!')),
                     );
                   },
                   icon: const Icon(Icons.sync, color: Colors.white, size: 18),
-                  label: const Text('Save & Sync Scores', style: TextStyle(color: Colors.white)),
+                  label: const Text('Save & Sync Scores',
+                      style: TextStyle(color: Colors.white)),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: LavaTheme.orangeStart,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
                   ),
                 ),
               ],

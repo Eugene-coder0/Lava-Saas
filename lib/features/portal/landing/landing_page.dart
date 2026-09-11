@@ -40,7 +40,8 @@ class LandingPage extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.local_fire_department, color: Colors.white, size: 18),
+                          child: const Icon(Icons.local_fire_department,
+                              color: Colors.white, size: 18),
                         ),
                         const SizedBox(width: 10),
                         const Text(
@@ -56,24 +57,42 @@ class LandingPage extends StatelessWidget {
                     // Navigation Links & Login Button
                     Row(
                       children: [
-                        if (MediaQuery.of(context).size.width > 700) ...[
-                          const Text('Home', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: Color(0xFF3A2A1A))),
+                        if (MediaQuery.of(context).size.width > 1000) ...[
+                          const Text('Home',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF3A2A1A))),
                           const SizedBox(width: 20),
-                          const Text('About', style: TextStyle(fontSize: 13, color: Color(0xFF8A7660))),
+                          const Text('About',
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xFF8A7660))),
                           const SizedBox(width: 20),
-                          const Text('Academics', style: TextStyle(fontSize: 13, color: Color(0xFF8A7660))),
+                          const Text('Academics',
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xFF8A7660))),
                           const SizedBox(width: 20),
-                          const Text('Admissions', style: TextStyle(fontSize: 13, color: Color(0xFF8A7660))),
+                          const Text('Admissions',
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xFF8A7660))),
                           const SizedBox(width: 20),
-                          const Text('Gallery', style: TextStyle(fontSize: 13, color: Color(0xFF8A7660))),
+                          const Text('Gallery',
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xFF8A7660))),
                           const SizedBox(width: 24),
                         ],
                         ValueListenableBuilder<ThemeMode>(
                           valueListenable: LavaTheme.themeMode,
                           builder: (context, mode, child) {
                             return IconButton(
-                              icon: Icon(mode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode, color: const Color(0xFF3A2A1A)),
-                              tooltip: mode == ThemeMode.dark ? 'Switch to light mode' : 'Switch to dark mode',
+                              icon: Icon(
+                                  mode == ThemeMode.dark
+                                      ? Icons.dark_mode
+                                      : Icons.light_mode,
+                                  color: const Color(0xFF3A2A1A)),
+                              tooltip: mode == ThemeMode.dark
+                                  ? 'Switch to light mode'
+                                  : 'Switch to dark mode',
                               onPressed: LavaTheme.toggleTheme,
                             );
                           },
@@ -81,7 +100,8 @@ class LandingPage extends StatelessWidget {
                         GradientButton(
                           text: 'Portal login',
                           onPressed: () => _openLogin(context),
-                          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 18, vertical: 10),
                         ),
                       ],
                     ),
@@ -146,14 +166,15 @@ class LandingPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
 // ✅ CORRECT
-ConstrainedBox(
-  constraints: const BoxConstraints(maxWidth: 440),
-  child: const Text(
-    'A full academic community for the mind, body, and character of every child.',
-    textAlign: TextAlign.center,
-    style: TextStyle(fontSize: 14, color: Color(0xFF5C4A38)),
-  ),
-),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 440),
+                      child: const Text(
+                        'A full academic community for the mind, body, and character of every child.',
+                        textAlign: TextAlign.center,
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0xFF5C4A38)),
+                      ),
+                    ),
                     const SizedBox(height: 22),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -161,7 +182,8 @@ ConstrainedBox(
                         GradientButton(
                           text: 'Apply for admission',
                           onPressed: () {},
-                          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 22, vertical: 12),
                         ),
                         const SizedBox(width: 12),
                         OutlinedButton(
@@ -169,10 +191,13 @@ ConstrainedBox(
                           style: OutlinedButton.styleFrom(
                             foregroundColor: const Color(0xFF3A2A1A),
                             side: const BorderSide(color: Color(0xFFF0E0C8)),
-                            padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 22, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8)),
                           ),
-                          child: const Text('Explore academics', style: TextStyle(fontSize: 14)),
+                          child: const Text('Explore academics',
+                              style: TextStyle(fontSize: 14)),
                         ),
                       ],
                     ),
@@ -185,10 +210,11 @@ ConstrainedBox(
             Container(
               color: Colors.white,
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 24),
-              child: MaxWidthContainer(
+              child: const MaxWidthContainer(
                 child: Row(
                   children: [
-                    _StatItem(number: '642', label: 'Students', showBorder: false),
+                    _StatItem(
+                        number: '642', label: 'Students', showBorder: false),
                     _StatItem(number: '58', label: 'Teaching staff'),
                     _StatItem(number: '27', label: 'Years running'),
                     _StatItem(number: '96%', label: 'WAEC pass rate'),
@@ -216,7 +242,10 @@ ConstrainedBox(
                     const SizedBox(height: 6),
                     const Text(
                       'More than a classroom',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF3A2A1A)),
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF3A2A1A)),
                     ),
                     const SizedBox(height: 24),
                     LayoutBuilder(
@@ -230,10 +259,18 @@ ConstrainedBox(
                           crossAxisSpacing: 14,
                           childAspectRatio: isDesktop ? 1.4 : 1.2,
                           children: const [
-                            _AcademicCard(title: 'Sciences', icon: Icons.science_outlined),
-                            _AcademicCard(title: 'Arts & culture', icon: Icons.palette_outlined),
-                            _AcademicCard(title: 'Sports', icon: Icons.sports_soccer_outlined),
-                            _AcademicCard(title: 'Clubs & societies', icon: Icons.groups_outlined),
+                            _AcademicCard(
+                                title: 'Sciences',
+                                icon: Icons.science_outlined),
+                            _AcademicCard(
+                                title: 'Arts & culture',
+                                icon: Icons.palette_outlined),
+                            _AcademicCard(
+                                title: 'Sports',
+                                icon: Icons.sports_soccer_outlined),
+                            _AcademicCard(
+                                title: 'Clubs & societies',
+                                icon: Icons.groups_outlined),
                           ],
                         );
                       },
@@ -250,15 +287,17 @@ ConstrainedBox(
               child: MaxWidthContainer(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final isDesktop = constraints.maxWidth > 650;
+                    final isDesktop = constraints.maxWidth > 900;
                     return Flex(
                       direction: isDesktop ? Axis.horizontal : Axis.vertical,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: isDesktop ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                      crossAxisAlignment: isDesktop
+                          ? CrossAxisAlignment.center
+                          : CrossAxisAlignment.start,
                       children: [
-                        Column(
+                        const Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               'ADMISSIONS',
                               style: TextStyle(
@@ -271,12 +310,16 @@ ConstrainedBox(
                             SizedBox(height: 6),
                             Text(
                               '2026/2027 session now open',
-                              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
                             ),
                             SizedBox(height: 6),
                             Text(
                               'Entrance exams run monthly — apply online in under 10 minutes.',
-                              style: TextStyle(fontSize: 13, color: Color(0xFFD9C9B4)),
+                              style: TextStyle(
+                                  fontSize: 13, color: Color(0xFFD9C9B4)),
                             ),
                           ],
                         ),
@@ -284,7 +327,8 @@ ConstrainedBox(
                         GradientButton(
                           text: 'Start application',
                           onPressed: () {},
-                          padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 22, vertical: 12),
                         ),
                       ],
                     );
@@ -319,7 +363,7 @@ ConstrainedBox(
                           crossAxisCount: isDesktop ? 3 : 1,
                           mainAxisSpacing: 14,
                           crossAxisSpacing: 14,
-                          childAspectRatio: isDesktop ? 1.5 : 2.2,
+                          childAspectRatio: isDesktop ? 1.65 : 1.9,
                           children: const [
                             _NewsCard(
                               title: '63 students score 300+ in UTME',
@@ -352,19 +396,21 @@ ConstrainedBox(
               child: MaxWidthContainer(
                 child: LayoutBuilder(
                   builder: (context, constraints) {
-                    final isDesktop = constraints.maxWidth > 600;
+                    final isDesktop = constraints.maxWidth > 1000;
                     return Flex(
                       direction: isDesktop ? Axis.horizontal : Axis.vertical,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
                         Text(
                           '© 2026 Greenfield Secondary School · Powered by LavaSaaS',
-                          style: TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
+                          style:
+                              TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
                         ),
                         SizedBox(height: 8),
                         Text(
                           '107 Liasu Rd, Idimu, Lagos · info@greenfield.edu.ng',
-                          style: TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
+                          style:
+                              TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
                         ),
                       ],
                     );
@@ -429,7 +475,8 @@ class GradientButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+          style: const TextStyle(
+              color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
         ),
       ),
     );
@@ -453,14 +500,18 @@ class _StatItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           border: showBorder
-              ? const Border(left: BorderSide(color: Color(0xFFF0E0C8), width: 0.5))
+              ? const Border(
+                  left: BorderSide(color: Color(0xFFF0E0C8), width: 0.5))
               : null,
         ),
         child: Column(
           children: [
             Text(
               number,
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFFFF5F1F)),
+              style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFFF5F1F)),
             ),
             const SizedBox(height: 2),
             Text(
@@ -504,7 +555,10 @@ class _AcademicCard extends StatelessWidget {
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF3A2A1A)),
+            style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: Color(0xFF3A2A1A)),
           ),
         ],
       ),
@@ -535,7 +589,7 @@ class _NewsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 80,
+            height: 64,
             width: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -549,7 +603,7 @@ class _NewsCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -557,12 +611,16 @@ class _NewsCard extends StatelessWidget {
                   title,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF3A2A1A)),
+                  style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF3A2A1A)),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   timeAgo,
-                  style: const TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
+                  style:
+                      const TextStyle(fontSize: 12, color: Color(0xFF8A7660)),
                 ),
               ],
             ),

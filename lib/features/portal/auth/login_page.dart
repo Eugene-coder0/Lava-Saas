@@ -105,8 +105,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final isDesktop = MediaQuery.of(context).size.width > 768;
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -118,7 +116,8 @@ class _LoginPageState extends State<LoginPage> {
         ),
         title: const Text(
           'Portal Login',
-          style: TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.bold),
+          style:
+              TextStyle(color: Color(0xFF0F172A), fontWeight: FontWeight.bold),
         ),
       ),
       body: Center(
@@ -147,12 +146,16 @@ class _LoginPageState extends State<LoginPage> {
                             color: const Color(0xFFFF6B35),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: const Icon(Icons.school, color: Colors.white, size: 20),
+                          child: const Icon(Icons.school,
+                              color: Colors.white, size: 20),
                         ),
                         const SizedBox(width: 10),
                         const Text(
                           'Lava SaaS Portal',
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0F172A)),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF0F172A)),
                         ),
                       ],
                     ),
@@ -161,7 +164,10 @@ class _LoginPageState extends State<LoginPage> {
                     // Role Selection Dropdown
                     const Text(
                       'Select Portal Account',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF475569)),
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF475569)),
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -214,7 +220,10 @@ class _LoginPageState extends State<LoginPage> {
                     // Email Field
                     const Text(
                       'Email Address / ID',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF475569)),
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF475569)),
                     ),
                     const SizedBox(height: 8),
                     TextField(
@@ -224,14 +233,17 @@ class _LoginPageState extends State<LoginPage> {
                         filled: true,
                         fillColor: const Color(0xFFF1F5F9),
                         prefixIcon: const Icon(Icons.email_outlined, size: 20),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFCBD5E1)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFCBD5E1)),
                         ),
                       ),
                     ),
@@ -241,7 +253,10 @@ class _LoginPageState extends State<LoginPage> {
                     // Password Field
                     const Text(
                       'Password',
-                      style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Color(0xFF475569)),
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF475569)),
                     ),
                     const SizedBox(height: 8),
                     TextField(
@@ -254,19 +269,25 @@ class _LoginPageState extends State<LoginPage> {
                         prefixIcon: const Icon(Icons.lock_outline, size: 20),
                         suffixIcon: IconButton(
                           icon: Icon(
-                            _obscurePassword ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                            _obscurePassword
+                                ? Icons.visibility_outlined
+                                : Icons.visibility_off_outlined,
                             size: 20,
                           ),
-                          onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                          onPressed: () => setState(
+                              () => _obscurePassword = !_obscurePassword),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 14, horizontal: 12),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFCBD5E1)),
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(color: Color(0xFFCBD5E1)),
+                          borderSide:
+                              const BorderSide(color: Color(0xFFCBD5E1)),
                         ),
                       ),
                     ),
@@ -282,18 +303,21 @@ class _LoginPageState extends State<LoginPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFFF6B35),
                           foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8)),
                           elevation: 0,
                         ),
                         child: _isLoading
                             ? const SizedBox(
                                 height: 20,
                                 width: 20,
-                                child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                                child: CircularProgressIndicator(
+                                    color: Colors.white, strokeWidth: 2),
                               )
                             : const Text(
                                 'Sign In to Dashboard',
-                                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15),
                               ),
                       ),
                     ),
@@ -311,12 +335,14 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.info_outline, size: 18, color: Color(0xFF2563EB)),
+                          const Icon(Icons.info_outline,
+                              size: 18, color: Color(0xFF2563EB)),
                           const SizedBox(width: 8),
                           Expanded(
                             child: Text(
                               _demoAccessHint,
-                              style: const TextStyle(fontSize: 12, color: Color(0xFF1E40AF)),
+                              style: const TextStyle(
+                                  fontSize: 12, color: Color(0xFF1E40AF)),
                             ),
                           ),
                         ],

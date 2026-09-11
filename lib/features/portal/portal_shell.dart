@@ -45,7 +45,7 @@ class PortalShell extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: LavaTheme.orangeStart.withOpacity(0.1),
+                color: LavaTheme.orangeStart.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(6),
               ),
               child: Text(
@@ -64,8 +64,12 @@ class PortalShell extends StatelessWidget {
             valueListenable: LavaTheme.themeMode,
             builder: (context, mode, child) {
               return IconButton(
-                icon: Icon(mode == ThemeMode.dark ? Icons.dark_mode : Icons.light_mode),
-                tooltip: mode == ThemeMode.dark ? 'Switch to light mode' : 'Switch to dark mode',
+                icon: Icon(mode == ThemeMode.dark
+                    ? Icons.dark_mode
+                    : Icons.light_mode),
+                tooltip: mode == ThemeMode.dark
+                    ? 'Switch to light mode'
+                    : 'Switch to dark mode',
                 onPressed: LavaTheme.toggleTheme,
               );
             },
@@ -89,9 +93,11 @@ class PortalShell extends StatelessWidget {
             selectedIndex: selectedIndex,
             onDestinationSelected: onDestinationSelected,
             labelType: NavigationRailLabelType.selected,
-            indicatorColor: LavaTheme.orangeStart.withOpacity(0.15),
-            selectedIconTheme: const IconThemeData(color: LavaTheme.orangeStart),
-            unselectedIconTheme: const IconThemeData(color: LavaTheme.textSecondary),
+            indicatorColor: LavaTheme.orangeStart.withValues(alpha: 0.15),
+            selectedIconTheme:
+                const IconThemeData(color: LavaTheme.orangeStart),
+            unselectedIconTheme:
+                const IconThemeData(color: LavaTheme.textSecondary),
             selectedLabelTextStyle: const TextStyle(
               color: LavaTheme.orangeStart,
               fontWeight: FontWeight.bold,
@@ -104,7 +110,8 @@ class PortalShell extends StatelessWidget {
               );
             }).toList(),
           ),
-          const VerticalDivider(thickness: 1, width: 1, color: Color(0xFFEFECE6)),
+          const VerticalDivider(
+              thickness: 1, width: 1, color: Color(0xFFEFECE6)),
           // Main Portal View Body
           Expanded(
             child: Padding(
